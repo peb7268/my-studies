@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<SCRIPT type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></SCRIPT>
+
+<SCRIPT type="text/javascript">
+
+	$(document).ready(function() {
+		//console.log('dom loaded');
+	});
+	
+	var string = "i'm a string with substance";
+	
+	//slice(start_pos, end_pos);
+	//if you only give slice one parameter it starts there and returns the rest of the string
+	//console.log( string.slice(6,12) );
+	
+	//start at the starting point and get the rest of the string
+	//console.log( string.slice(6,string.length) );
+	//console.log( 'the string is : ' + string.length + ' characters long' );
+	//console.log( 'the string is at : ' + (string.length - 6) + ' th position' );
+	
+	//object.indexOf  will return the index where a particular item is located at. I.E indexOf(':') finds a colon.
+	
+	//Regular Expressions ************************************************************************************* 
+	/* Regex are written inside of forward slashes / like this /
+	If a slash is inside a regex it must be escaped by a backwards slash /\//
+	
+	Square Brackets [ ]  are used to denote a set in Regex. They group what you are trying to find.
+	To find an asterisk or curly brace you could do this: var asteriskOrBrace = /[\{\*]/;
+	the curly brace and asterisk are escaped.Non numeric chars have special meaning in a regex ( like asterisk)
+	so when referring to the actual value its a good idea to escape those characters with an backslash. Below are a 
+	few symbols:
+	
+	. = any symbol
+	\d = a digit
+	\w = any alpha numeric character
+	\s = any whitespace such as a line break, tab or space
+	\b = a word "boundry" which can be punctuation, a start of a string, or whitespace.
+	
+	| indicates an or option /(hot|cold)(weather|women)/
+	
+	*** after the closing slash you can add options by using a flag /i for instance 
+	means case insensitive 
+	
+	
+	//replacing the above letters with their capital counterpart inverts the logic. Thus 'S' instead of 's' would refer to NOT a space.
+	// in additon to this inversion tool when using [ ] for a set you can use the carat symbol ^ inside to invert the logic of the pattern
+	
+	//to match that a string starts with somethign use ^ 
+	//to match it ends with something use $
+	
+	* allows it to repeat any number of times
+	+ occurs at least one time
+	? makes something optional
+	
+	{ # } after the pattern is the number of times a pattern can occur so { 4 } means it can only happen once
+	{ least X, most Y } pattern must happen at least X number of times and at most Y number. 
+	{ 2, } means 2 or more and { , 4 } means 4 or less
+	
+	//A date pattern 
+	var date = /\d{1,2}\/\d\d?\/\d{4}/;
+	
+	//email pattern
+	var email = /\b[\w\.-]+@[\w\.-]+\.\w{2,3}\b/
+	
+	instead of using search on the string or charAt or indexOf you can use match for Regex and 
+	instead of returrning a position in the character array where the occurence was found it will 
+	return an array of the matched elements.
+	
+	Practice: 
+	*/
+	
+	//1) find a digit surrounded by a space
+	//var query = "1d 7b y6 8j s8 8k 9 ";
+	//console.log( query.search(/\s\d\s/) );
+	
+	//var query = "born 15/11/2003 mother Spot: White Fang";
+	//console.log( query.search(/[2\d][2\d][4\d]/) );
+	
+	
+	//2) matches a username
+	//var query = "admin3365" //True
+	/* var query = "admin336519374h4i38237292" //false
+	console.log( query.match(/^[a-z0-9_-]{3,16}$/) ); 
+	*/
+	
+	//-- all letters 
+	//-- all numbers
+	//-- underscore or hyphen
+	//-- min 3 letters max 16
+	
+	//3) Matching an email
+	var query = "peb7268@gmail.com" //True
+	//var query = "$$peb7268@gmail.com" //False
+	console.log( query.match(/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/));
+	
+	
+	
+</script>
+
+</head>
+<body>
+
+</body>
+</html>

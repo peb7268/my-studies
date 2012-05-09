@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Lab 9 - Git Immersion - Brought to you by EdgeCase</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" media="screen" href="reset.css">
+  <link rel="stylesheet" media="screen" href="screen.css">
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script type="text/javascript">
+   var _gaq = _gaq || [];
+   _gaq.push(['_setAccount', 'UA-1142510-7']);
+   _gaq.push(['_trackPageview']);
+   (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+  </script>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="html5.js"></script>
+  <script type="text/javascript" src="UI.js"></script>
+</head>
+
+<body data-lab-id="9">
+  <header>
+    <a href="index.html" id="home_link">Git Immersion</a>
+    <a href="http://edgecase.com" target="_blank" id="edgecase_link">Brought to you by EdgeCase</a>
+
+    <nav>
+      <ul>
+  <li class="arrow next">
+          <a href="lab_10.html">Next</a>
+      </li>
+  <li class="arrow previous">
+          <a href="lab_08.html">Previous</a>
+      </li>
+  <li class="index_button"><a href="#">Index</a></li>
+</ul>
+
+    </nav>
+    <div id="bookmark">Bookmark</div>
+  </header>
+
+  <div id="main_content">
+    <h1 class="lab_title"><em>lab 9</em>  Changes, not Files</h1>
+<h3>Goals</h3>
+<ul>
+	<li>Learn that git works with changes, not files.</li>
+</ul>
+<p>Most source control systems work with files.  You add a file to source control and the system will track changes to the file from that point on.</p>
+<p>Git focuses on the changes to a file rather than the file itself. When you say <code>git add file</code>, you are not telling git to add the file to the repository.  Rather you are saying that git should make note of the current state of that file to be commited later.</p>
+<p>We will attempt to explore that difference in this lab.</p>
+<h2>First Change: Allow a default name <em>01</em></h2>
+<p>Change the &#8220;Hello, World&#8221; program to have a default value if a command line argument is not supplied.</p>
+<h4>File: <em>hello.rb</em></h4>
+<pre class="file">name = ARGV.first || "World"
+
+puts "Hello, #{name}!"
+</pre>
+<h2>Add this Change <em>02</em></h2>
+<p>Now add this change to the git&#8217;s staging area.</p>
+<h4>Execute:</h4>
+<pre class="instructions">git add hello.rb</pre>
+<h2>Second change: Add a comment <em>03</em></h2>
+<p>Now add a comment to the &#8220;Hello, World&#8221; program.</p>
+<h4>File: <em>hello.rb</em></h4>
+<pre class="file"># Default is "World"
+name = ARGV.first || "World"
+
+puts "Hello, #{name}!"
+</pre>
+<h2>Check the current status <em>04</em></h2>
+<h4>Execute:</h4>
+<pre class="instructions">git status</pre>
+<p>You should see &#8230;</p>
+<h4>Output:</h4>
+<pre class="sample">$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file&gt;..." to unstage)
+#
+#	modified:   hello.rb
+#
+# Changed but not updated:
+#   (use "git add &lt;file&gt;..." to update what will be committed)
+#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+#
+#	modified:   hello.rb
+#
+</pre>
+<p>Notice how <code>hello.rb</code> is listed twice in the status.  The first change (adding a default) is staged and is ready to be committed.  The second change (adding a comment) is unstaged.  If you were to commit right now, the comment would not be saved in the repository.</p>
+<p>Let&#8217;s try that.</p>
+<h2>Committing <em>05</em></h2>
+<p>Commit the staged change (the default value), and then recheck the status.</p>
+<h4>Execute:</h4>
+<pre class="instructions">git commit -m "Added a default value"
+git status</pre>
+<p>You should see &#8230;</p>
+<h4>Output:</h4>
+<pre class="sample">$ git commit -m "Added a default value"
+[master b819ef8] Added a default value
+ 1 files changed, 3 insertions(+), 1 deletions(-)
+$ git status
+# On branch master
+# Changed but not updated:
+#   (use "git add &lt;file&gt;..." to update what will be committed)
+#   (use "git checkout -- &lt;file&gt;..." to discard changes in working directory)
+#
+#	modified:   hello.rb
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+</pre>
+<p>The status command is telling you that <code>hello.rb</code> has unrecorded changes, but is no longer in the staging area.</p>
+<h2>Add the Second Change <em>06</em></h2>
+<p>Now add the second change to staging area, then run git status.</p>
+<h4>Execute:</h4>
+<pre class="instructions">git add .
+git status</pre>
+<p class="note"><strong>Note:</strong> We used the current directory (&#8216;.&#8217;) as the file to add.  This is a really convenient shortcut for adding in all the changes to the files in the current directory and below.  But since it adds everything, it is a <em>really</em> good idea to check the status before doing an <tt>add .</tt>, just to make sure you don&#8217;t add any file that is not intended.</p>
+<p class="note">I wanted you to see the &#8220;add .&#8221; trick, but we will continue to add explicit files in the rest of this tutorial just to be safe.</p>
+<p>You should see &#8230;</p>
+<h4>Output:</h4>
+<pre class="sample">$ git status
+# On branch master
+# Changes to be committed:
+#   (use "git reset HEAD &lt;file&gt;..." to unstage)
+#
+#	modified:   hello.rb
+#
+</pre>
+<p>Now the second change has been staged and is ready to commit.</p>
+<h2>Commit the Second Change <em>07</em></h2>
+<h4>Execute:</h4>
+<pre class="instructions">git commit -m "Added a comment"</pre>
+  </div>
+
+  <div id="index">
+  <h1>Labs Index</h1>
+  <div id="show_bookmarks"></div>
+  <div id="no_bookmarks"></div>
+  <ul>
+    <li data-lab-id="0"><a href="index.html"><span>&nbsp;</span>Cover Page</a></li>
+          <li data-lab-id="1"><a href="lab_01.html"><span>1:</span> Setup</a></li>
+          <li data-lab-id="2"><a href="lab_02.html"><span>2:</span> More Setup</a></li>
+          <li data-lab-id="3"><a href="lab_03.html"><span>3:</span> Create a Project</a></li>
+          <li data-lab-id="4"><a href="lab_04.html"><span>4:</span> Checking Status</a></li>
+          <li data-lab-id="5"><a href="lab_05.html"><span>5:</span> Making Changes</a></li>
+          <li data-lab-id="6"><a href="lab_06.html"><span>6:</span> Staging Changes</a></li>
+          <li data-lab-id="7"><a href="lab_07.html"><span>7:</span> Staging and Committing</a></li>
+          <li data-lab-id="8"><a href="lab_08.html"><span>8:</span> Commiting Changes</a></li>
+          <li data-lab-id="9"><a href="lab_09.html"><span>9:</span> Changes, not Files</a></li>
+          <li data-lab-id="10"><a href="lab_10.html"><span>10:</span> History</a></li>
+          <li data-lab-id="11"><a href="lab_11.html"><span>11:</span> Aliases</a></li>
+          <li data-lab-id="12"><a href="lab_12.html"><span>12:</span> Getting Old Versions</a></li>
+          <li data-lab-id="13"><a href="lab_13.html"><span>13:</span> Tagging versions</a></li>
+          <li data-lab-id="14"><a href="lab_14.html"><span>14:</span> Undoing Local Changes (before staging)</a></li>
+          <li data-lab-id="15"><a href="lab_15.html"><span>15:</span> Undoing Staged Changes (before committing)</a></li>
+          <li data-lab-id="16"><a href="lab_16.html"><span>16:</span> Undoing Committed Changes</a></li>
+          <li data-lab-id="17"><a href="lab_17.html"><span>17:</span> Removing Commits from a Branch</a></li>
+          <li data-lab-id="18"><a href="lab_18.html"><span>18:</span> Remove the oops tag</a></li>
+          <li data-lab-id="19"><a href="lab_19.html"><span>19:</span> Amending Commits</a></li>
+          <li data-lab-id="20"><a href="lab_20.html"><span>20:</span> Moving Files</a></li>
+          <li data-lab-id="21"><a href="lab_21.html"><span>21:</span> More Structure</a></li>
+          <li data-lab-id="22"><a href="lab_22.html"><span>22:</span> Git Internals: The .git directory</a></li>
+          <li data-lab-id="23"><a href="lab_23.html"><span>23:</span> Git Internals: Working directly with Git Objects</a></li>
+          <li data-lab-id="24"><a href="lab_24.html"><span>24:</span> Creating a Branch</a></li>
+          <li data-lab-id="25"><a href="lab_25.html"><span>25:</span> Navigating Branches</a></li>
+          <li data-lab-id="26"><a href="lab_26.html"><span>26:</span> Changes in Master</a></li>
+          <li data-lab-id="27"><a href="lab_27.html"><span>27:</span> Viewing Diverging Branches</a></li>
+          <li data-lab-id="28"><a href="lab_28.html"><span>28:</span> Merging</a></li>
+          <li data-lab-id="29"><a href="lab_29.html"><span>29:</span> Creating a Conflict</a></li>
+          <li data-lab-id="30"><a href="lab_30.html"><span>30:</span> Resolving Conflicts</a></li>
+          <li data-lab-id="31"><a href="lab_31.html"><span>31:</span> Rebasing VS Merging</a></li>
+          <li data-lab-id="32"><a href="lab_32.html"><span>32:</span> Resetting the Greet Branch</a></li>
+          <li data-lab-id="33"><a href="lab_33.html"><span>33:</span> Resetting the Master Branch</a></li>
+          <li data-lab-id="34"><a href="lab_34.html"><span>34:</span> Rebasing</a></li>
+          <li data-lab-id="35"><a href="lab_35.html"><span>35:</span> Merging Back to Master</a></li>
+          <li data-lab-id="36"><a href="lab_36.html"><span>36:</span> Mutliple Repositories</a></li>
+          <li data-lab-id="37"><a href="lab_37.html"><span>37:</span> Cloning Repositories</a></li>
+          <li data-lab-id="38"><a href="lab_38.html"><span>38:</span> Review the Cloned Repository</a></li>
+          <li data-lab-id="39"><a href="lab_39.html"><span>39:</span> What is Origin?</a></li>
+          <li data-lab-id="40"><a href="lab_40.html"><span>40:</span> Remote Branches</a></li>
+          <li data-lab-id="41"><a href="lab_41.html"><span>41:</span> Change the Original Repository</a></li>
+          <li data-lab-id="42"><a href="lab_42.html"><span>42:</span> Fetching Changes</a></li>
+          <li data-lab-id="43"><a href="lab_43.html"><span>43:</span> Merging Pulled Changes</a></li>
+          <li data-lab-id="44"><a href="lab_44.html"><span>44:</span> Pulling Changes</a></li>
+          <li data-lab-id="45"><a href="lab_45.html"><span>45:</span> Adding a Tracking Branch</a></li>
+          <li data-lab-id="46"><a href="lab_46.html"><span>46:</span> Bare Repositories</a></li>
+          <li data-lab-id="47"><a href="lab_47.html"><span>47:</span> Adding a Remote Repository</a></li>
+          <li data-lab-id="48"><a href="lab_48.html"><span>48:</span> Pushing a Change</a></li>
+          <li data-lab-id="49"><a href="lab_49.html"><span>49:</span> Pulling Shared Changes</a></li>
+          <li data-lab-id="50"><a href="lab_50.html"><span>50:</span> Hosting your Git Repositories</a></li>
+          <li data-lab-id="51"><a href="lab_51.html"><span>51:</span> Sharing Repos</a></li>
+          <li data-lab-id="52"><a href="lab_52.html"><span>52:</span> Advanced / Future Topics</a></li>
+          <li data-lab-id="53"><a href="lab_53.html"><span>53:</span> Thank You</a></li>
+      </ul>
+</div>
+
+
+  <footer>
+    <nav>
+      <ul>
+  <li class="arrow next">
+          <a href="lab_10.html">Next</a>
+      </li>
+  <li class="arrow previous">
+          <a href="lab_08.html">Previous</a>
+      </li>
+  <li class="index_button"><a href="#">Index</a></li>
+</ul>
+
+    </nav>
+    <a href="http://edgecase.com" target="_blank" id="edgecase_link_small">EdgeCase</a>
+  </footer>
+</body>
+</html>

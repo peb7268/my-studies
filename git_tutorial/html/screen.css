@@ -1,0 +1,456 @@
+@font-face {
+  font-family : 'BebasNeueRegular';
+  src         : url('BebasNeue-webfont.eot');
+  src         : local('☺'), url('BebasNeue-webfont.woff') format('woff'), url('BebasNeue-webfont.ttf') format('truetype');
+  font-weight : normal;
+  font-style  : normal; }
+
+
+html, body {
+  font-family : georgia, serif;
+  background  : url(background.jpg); }
+
+
+/* Header
+------------------------------------------------------------ */
+
+header {
+  position       : relative;
+  width          : 688px;
+  height         : 179px;
+  margin         : 45px 0;
+  font-size      : 14px;
+  font-style     : italic;
+  text-transform : uppercase;
+  background     : url(heading.png) no-repeat 100% 0; }
+
+header a,
+header span {
+  position        : absolute;
+  color           : #fff;
+  letter-spacing  : 0.1em;
+  text-indent     : -999em;
+  text-decoration : none; }
+
+header a#home_link {
+  top    : 0;
+  left   : 50px;
+  width  : 564px;
+  height : 90px; }
+
+header a#edgecase_link {
+  top    : 96px;
+  left   : 50px;
+  width  : 334px;
+  height : 40px; }
+
+header .arrow * {
+  top         : 107px;
+  width       : 126px;
+  height      : 57px;
+  line-height : 55px;
+  text-align  : center; }
+
+header .arrow span { color: #aaa; }
+
+header .previous * {
+  left        : 400px;
+  text-indent : 15px; }
+
+header .next * {
+  left        : 542px;
+  text-indent : -15px; }
+
+header .index_button * {
+  top        : 31px;
+  left       : 634px;
+  width      : 40px;
+  height     : 40px;
+  background : url(index.png) no-repeat 50% 50%; }
+
+header #bookmark {
+  position    : absolute;
+  top         : -75px;
+  left        : 730px;
+  width       : 31px;
+  height      : 74px;
+  text-indent : -999em;
+  cursor      : pointer;
+  background  : url(bookmarks.png) no-repeat -38px 0; }
+
+
+
+/* Lab Title
+------------------------------------------------------------ */
+
+h1.lab_title {
+  width          : 608px;
+  margin         : 0 0 40px 84px;
+  border-bottom  : 1px solid #dfdfdf;
+  color          : #222;
+  font           : 48px 'BebasNeueRegular', helvetica, arial, sans-serif;
+  letter-spacing : 0.025em;
+  white-space    : nowrap;
+  text-align     : center;
+  text-transform : uppercase; }
+
+h1.lab_title em {
+  display        : block;
+  height         : 21px;
+  margin-bottom  : 13px;
+  font           : 18px/16px georgia, sans-serif;
+  font-variant   : small-caps;
+  letter-spacing : 0;
+  text-transform : lowercase;
+  background     : url(lab_title_background.png) no-repeat; }
+
+
+
+/* Goals
+------------------------------------------------------------ */
+
+#main_content h3 {
+  width          : 608px;
+  margin         : 0 0 0.15em 85px;
+  font           : 28px 'BebasNeueRegular', helvetica, arial, sans-serif;
+  text-transform : uppercase; }
+
+#main_content ul { margin: 0 0 40px 85px; }
+
+#main_content li {
+  margin-bottom : 0.5em;
+  line-height   : 120%; }
+
+
+
+
+/* Main Content
+------------------------------------------------------------ */
+
+#main_content h2 {
+  position      : relative;
+  margin        : 30px 0;
+  padding       : 22px 0 2px 85px;
+  border-top    : 1px solid #ccc;
+  font          : 32px baskerville, georgia, sans-serif; }
+
+#main_content h2 em {
+  position    : absolute;
+  top         : 17px;
+  left        : 18px;
+  width       : 45px;
+  height      : 45px;
+  color       : #fff;
+  font        : 21px georgia, sans-serif;
+  line-height : 43px;
+  text-align  : center;
+  background  : url(star.png) no-repeat; }
+
+#main_content h4 {
+  display        : inline-block;
+  min-width      : 80px;
+  height         : 25px;
+  margin         : 10px 0 10px 85px;
+  padding        : 0 20px 0 8px;
+  color          : #fff;
+  font           : 18px 'BebasNeueRegular', helvetica, arial, sans-serif;
+  line-height    : 29px;
+  letter-spacing : 0.1em;
+  text-transform : uppercase;
+  background     : url(label.png) no-repeat 100% 0;
+
+ -moz-border-radius     : 3px 0 0 3px;
+ -webkit-border-radius  : 3px 0 0 3px;
+  border-radius         : 3px 0 0 3px; }
+
+#main_content h4 em {
+  padding-left   : 5px;
+  font           : 14px arial, sans-serif;
+  text-transform : lowercase;
+  letter-spacing : 0; }
+
+#main_content a { color: #d00; }
+
+div.instructions { margin-bottom: 1em; }
+
+div.instructions pre {
+  display       : block;
+  width         : 608px;
+  margin-bottom : 0.25em;
+  padding-left  : 22px;
+  margin-left   : 63px;
+  font          : 18px courier, monospace;
+  background    : url(prompt.png) no-repeat 0 50%; }
+
+#main_content img {
+  display     : block;
+  margin-left : 85px;
+ -webkit-box-shadow : 0 0 14px rgba(0,0,0, 0.15); }
+
+#main_content p {
+  width        : 608px;
+  margin       : 1em 0;
+  padding-left : 85px;
+  line-height  : 130%; }
+
+#main_content ol {
+  width        : 608px;
+  margin       : 1em 0;
+  padding-left : 85px;
+  line-height  : 130px; }
+
+#main_content pre.sample {
+  display       : block;
+  margin-bottom : 1em;
+  padding       : 10px 0 10px 85px;
+  color         : #74e83f;
+  font          : 13px courier, monospace;
+  background    : #1e1e1e; }
+
+#main_content pre.file {
+  display       : block;
+  margin-bottom : 1em;
+  border-top    : 1px solid #b6b6b6;
+  border-bottom : 1px solid #b6b6b6;
+  padding       : 10px 0 10px 85px;
+  font          : 13px courier, monospace;
+  background    : #fff; }
+
+#main_content p.note {
+  margin-left : 2em;
+  font-style  : italic;
+  color       : #555; }
+
+
+#border_left {
+  position     : relative;
+  top          : -85px;
+  width        : 608px;
+  margin-left  : 54px;
+  padding-top  : 85px;
+  padding-left : 23px;
+  background   : url(border_left.gif) repeat-y; }
+
+#homepage h1 {
+  margin : 0 0 10px 0;
+  color  : #cf0000;
+  font   : 32px 'BebasNeueRegular', helvetica, arial, sans-serif; }
+
+#homepage h2 { font: 21px 'BebasNeueRegular', helvetica, arial, sans-serif; }
+
+#homepage a { color: #000; }
+
+#homepage .beep {
+  float        : left;
+  margin-right : 32px; }
+
+#homepage #install {
+  position     : relative;
+  left         : -23px;
+  padding-left : 346px;
+  background   : url(install_circle.png) no-repeat 0 8px; }
+
+#homepage #brought_to_you_by {
+  position      : relative;
+  top           : -117px;
+  left          : 55px;
+  width         : 400px;
+  margin-bottom : 40px;
+  padding-left  : 346px;
+  background    : url(install_circle.png) no-repeat 0 8px; }
+
+#homepage #brought_to_you_by a {
+  display     : block;
+  width       : 280px;
+  height      : 89px;
+  text-indent : -999em;
+  background  : url(edgecase_logo.png); }
+
+#homepage #other_resources {
+  position      : relative;
+  top           : -30px;
+  left          : -27px;
+  width         : 300px;
+  margin-bottom : 20px;
+  padding-left  : 27px;
+  background    : url(circle.png) no-repeat 0 8px; }
+
+#intro p {
+  position     : relative;
+  left         : -27px;
+  font         : 18px baskerville, georgia, serif;
+  margin       : 0 0 40px 0;
+  padding-left : 27px;
+  background   : url(circle.png) no-repeat 0 8px; }
+
+#intro p em {
+  font-size  : 27px;
+  font-style : normal; }
+
+
+
+/* Labs Index
+------------------------------------------------------------ */
+
+#index {
+  display     : none;
+  position    : fixed;
+  top         : 0;
+  bottom      : 0;
+  left        : 50%;
+  width       : 420px;
+  margin-left : -210px;
+  background  : #e9e7e0;
+  z-index     : 2;
+
+ -moz-box-shadow     : 0 0 20px rgba(0,0,0, 0.5);
+ -webkit-box-shadow  : 0 0 20px rgba(0,0,0, 0.5);
+  box-shadow         : 0 0 20px rgba(0,0,0, 0.5); }
+
+#index.visible { display: block; }
+
+#index #show_bookmarks {
+  position   : absolute;
+  top        : -20px;
+  right      : 40px;
+  width      : 19px;
+  height     : 46px;
+  cursor     : pointer;
+  background : url(bookmarks.png) no-repeat;
+  z-index    : 2; }
+
+#index #no_bookmarks {
+  display     : none;
+  position    : absolute;
+  top         : 100px;
+  left        : 50%;
+  width       : 300px;
+  height      : 78px;
+  margin-left : -150px;
+  background  : url(no_bookmarks.png); }
+
+#index h1 {
+  position       : absolute;
+  top            : 0;
+  right          : 0;
+  left           : 0;
+  height         : 60px;
+  padding-left   : 30px;
+  font           : 24px 'BebasNeueRegular', helvetica, arial, sans-serif;
+  line-height    : 60px;
+  text-transform : uppercase;
+  background     : url(index_heading_background.png) repeat-x;
+  z-index        : 2; }
+
+#index ul {
+  overflow : auto;
+  position : absolute;
+  top      : 0;
+  right    : 5px;
+  bottom   : 0;
+  left     : 0;
+  padding  : 50px 0 10px 0;
+  z-index  : 1; }
+
+#index ul::-webkit-scrollbar                        { width: 10px; height: 10px; }
+#index ul::-webkit-scrollbar-track:enabled          { background-color: transparent; }
+#index ul::-webkit-scrollbar-button:start:decrement,
+#index ul::-webkit-scrollbar-button:end:increment   { display: block; width: 10px; height: 10px; background-color: transparent; }
+#index ul::-webkit-scrollbar-thumb:vertical,
+#index ul::-webkit-scrollbar-thumb:horizontal       { width: 30px; background-color: transparent; -webkit-border-radius: 5px; }
+#index ul.hover::-webkit-scrollbar-thumb:vertical,
+#index ul.hover::-webkit-scrollbar-thumb:horizontal { background-color: rgba(0, 0, 0, 0.3); -webkit-box-shadow: 0 1px 1px rgba(255,255,255, 0.5); }
+
+#index li {
+  overflow: hidden;
+  padding-left: 12px; }
+
+#index a {
+  display         : block;
+  height          : 28px;
+  color           : #353535;
+  font            : 14px helvetica, arial, sans-serif;
+  font-weight     : bold;
+  line-height     : 26px;
+  text-decoration : none;
+  text-shadow     : 0 1px 0 #fff;
+  background      : url(index_item_background.gif) no-repeat 0 100%; }
+
+#index li:last-child a { background: none; }
+
+#index a span {
+  float        : left;
+  display      : block;
+  margin-right : 5px;
+  width        : 25px;
+  font-weight  : normal;
+  text-align   : right; }
+
+
+
+/* Footer
+------------------------------------------------------------ */
+
+footer {
+  position   : relative;
+  height     : 100px;
+  margin-top : 50px;
+  border-top : 4px double #adadad;
+  background : #eee;
+  z-index    : 1; }
+
+footer nav {
+  position : relative;
+  width    : 608px;
+  margin   : 0 0 0 8px; }
+
+footer nav li {
+  position : absolute;
+  top      : 32px; }
+
+footer nav .arrow {
+  display : block;
+  width   : 144px;
+  height  : 32px; }
+
+footer nav .arrow * {
+  display         : inline-block;
+  height          : 32px;
+  color           : #222;
+  font            : 18px 'BebasNeueRegular', helvetica, arial, sans-serif;
+  line-height     : 34px;
+  text-decoration : none;
+  text-transform  : uppercase; }
+
+footer nav .arrow span { color: #aaa; }
+
+footer nav .previous   { left: 0; }
+footer nav .previous * {
+  float         : right;
+  padding       : 0 0 0 30px;
+  text-align    : right;
+  background    : url(previous_arrow.png) no-repeat; }
+
+footer nav .next   { left : 206px; }
+footer nav .next * {
+  padding      : 0 30px 0 40px;
+  background   : url(next_arrow.png) no-repeat 100% 0; }
+
+footer nav .index_button a {
+  position    : absolute;
+  top         : -5px;
+  left        : 174px;
+  width       : 40px;
+  height      : 40px;
+  text-indent : -999em;
+  background  : url(index.png); }
+
+footer a#edgecase_link_small {
+  position    : absolute;
+  top         : 24px;
+  left        : 575px;
+  display     : block;
+  width       : 169px;
+  height      : 53px;
+  text-indent : -999em;
+  background  : url(edgecase_logo_small.png); }

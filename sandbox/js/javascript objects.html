@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<meta charset=utf-8 />
+<title>JS Bin</title>
+<!--[if IE]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<style>
+  article, aside, figure, footer, header, hgroup, 
+  menu, nav, section { display: block; }
+</style>
+</head>
+<body>
+
+  
+  
+  <script type="text/javascript">
+  
+      /* -- Method 1: 
+var book = new book();
+
+//This is set via dot syntax
+book.title = "A Time To Kill";
+
+
+-- */
+
+//Method 2: Fastest method - Object Literal Declaration - Explicitly Sets the object
+var book = {
+
+  author: "John Grisham",  
+  title: "A Time To Kill",
+  publisher: "Random House",
+  reseller: "Amazon",
+  copies_sold: 1,
+  constructor: function(author, title, publisher, reseller, copies_sold) {
+    this.author = author;
+    this.title = title;
+    this.publisher = publisher;
+    this.seller = reseller;
+    this.copies_sold = copies_sold;
+  },
+  
+  //object methods
+  get_title: function(){
+    alert(this.title + ' is the title');
+  },
+  
+  get_publisher: function(){
+    alert(this.author + ' published this book');
+  },
+  
+  get_reseller: function(){
+    alert(this.reseller + ' sells this book');
+  },
+  
+  get_author: function(){
+    alert(this.author + ' is the author');
+  },
+  
+  get_copies_sold: function(){
+    alert(this.title + ' sold ' + this.copies_sold + ' copies');
+  },
+  
+  set_copies_sold: function(cs){
+    this.copies_sold = cs;
+  }
+  
+};
+
+
+//Call the author getter
+//book.get_author();
+//book.get_copies_sold();
+
+//Call the setter and then print its value
+//book.set_copies_sold(500);
+//book.get_copies_sold();
+
+
+/*-- OOP Notes  ------------------------------------------------------------------------------*
+- In JavaScript Objects act as both the instance and the prototype. In laymans terms, there is no
+- class and then an instance of a class in JavaScript. The Instance itself acts as a class if any
+- other objects want to be created from it.
+
+
+Thus to extend the book class above we would:
+*/
+
+
+var the_firm = Object.create(book);
+//the_firm.set_copies_sold(30000);
+//the_firm.title = 'The Firm';
+//the_firm.get_copies_sold();
+
+
+//This would get tiring to manually have to update each entry though so this is where
+//the traditional model would come into play with a constructor.
+var pelican_brief = book.constructor('John Grisham', 'The Pelican Brief', 'Random House', 'Borders', 300 );
+
+//pelican_brief.get_title();
+//pelican_brief.get_author();
+//pelican_brief.get_reseller();
+
+console.dir(pelican_brief);
+    
+  </script>
+</body>
+</html>

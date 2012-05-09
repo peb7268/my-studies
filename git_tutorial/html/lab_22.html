@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Lab 22 - Git Immersion - Brought to you by EdgeCase</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" media="screen" href="reset.css">
+  <link rel="stylesheet" media="screen" href="screen.css">
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <script type="text/javascript">
+   var _gaq = _gaq || [];
+   _gaq.push(['_setAccount', 'UA-1142510-7']);
+   _gaq.push(['_trackPageview']);
+   (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+  </script>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="html5.js"></script>
+  <script type="text/javascript" src="UI.js"></script>
+</head>
+
+<body data-lab-id="22">
+  <header>
+    <a href="index.html" id="home_link">Git Immersion</a>
+    <a href="http://edgecase.com" target="_blank" id="edgecase_link">Brought to you by EdgeCase</a>
+
+    <nav>
+      <ul>
+  <li class="arrow next">
+          <a href="lab_23.html">Next</a>
+      </li>
+  <li class="arrow previous">
+          <a href="lab_21.html">Previous</a>
+      </li>
+  <li class="index_button"><a href="#">Index</a></li>
+</ul>
+
+    </nav>
+    <div id="bookmark">Bookmark</div>
+  </header>
+
+  <div id="main_content">
+    <h1 class="lab_title"><em>lab 22</em>  Git Internals:<br> The .git directory</h1>
+<h3>Goals</h3>
+<ul>
+	<li>Learn about the structure of the <code>.git</code> directory</li>
+</ul>
+<h2>The <code>.git</code> Directory <em>01</em></h2>
+<p>Time to do some exploring.  First, from the root of your project directory&#8230;</p>
+<h4>Execute:</h4>
+<pre class="instructions">ls -C .git</pre>
+<h4>Output:</h4>
+<pre class="sample">$ ls -C .git
+COMMIT_EDITMSG	ORIG_HEAD	description	info		refs
+HEAD		branches	hooks		logs		rr-cache
+MERGE_RR	config		index		objects
+</pre>
+<p>This is the magic directory where all the git &#8220;stuff&#8221; is stored. Let&#8217;s peek in the objects directory.</p>
+<h2>The Object Store <em>02</em></h2>
+<h4>Execute:</h4>
+<pre class="instructions">ls -C .git/objects</pre>
+<h4>Output:</h4>
+<pre class="sample">$ ls -C .git/objects
+09	27	59	77	97	af	b8	e4	info
+11	28	69	78	9c	b5	c2	e7	pack
+24	43	6b	88	a4	b7	c4	ff
+</pre>
+<p>You should see a bunch of directories with 2 letter names.  The directory names are the first two letters of the sha1 hash of the object stored in git.</p>
+<h2>Deeper into the Object Store <em>03</em></h2>
+<h4>Execute:</h4>
+<pre class="instructions">ls -C .git/objects/&lt;dir&gt;</pre>
+<h4>Output:</h4>
+<pre class="sample">$ ls -C .git/objects/09
+6b74c56bfc6b40e754fc0725b8c70b2038b91e	b9248ae8c562c96eff503d776a2c95f19c2374
+9fb6f9d3a104feb32fcac22354c4d0e8a182c1
+</pre>
+<p>Look in one of the two-letter directories.  You should see some files with 38-character names.  These are the files that contain the objects stored in git.  These files are compressed and encoded, so looking at their contents directly won&#8217;t be very helpful, but we will take a closer look in a bit.</p>
+<h2>Config File <em>04</em></h2>
+<h4>Execute:</h4>
+<pre class="instructions">cat .git/config</pre>
+<h4>Output:</h4>
+<pre class="sample">$ cat .git/config
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+[user]
+	name = Jim Weirich
+	email = jim (at) edgecase.com
+</pre>
+<p>This is a project-specific configuration file.  Config entries in here will override the config entries in the <code>.gitconfig</code> file in your home directory, at least for this project.</p>
+<h2>Branches and Tags <em>05</em></h2>
+<h4>Execute:</h4>
+<pre class="instructions">ls .git/refs
+ls .git/refs/heads
+ls .git/refs/tags
+cat .git/refs/tags/v1</pre>
+<h4>Output:</h4>
+<pre class="sample">$ ls .git/refs
+heads
+tags
+$ ls .git/refs/heads
+master
+$ ls .git/refs/tags
+v1
+v1-beta
+$ cat .git/refs/tags/v1
+88976c644e65afa697b58fc940eb8f94c47f8129
+</pre>
+<p>You should recognize the files in the tags subdirectory.  Each file corresponds to a tag you created with the <code>git tag</code> command earlier. Its content is just the hash of the commit tied to the tag.</p>
+<p>The heads directory is similar, but is used for branches rather than tags.  We only have one branch at the moment, so all you will see is master in this directory.</p>
+<h2>The <span class="caps">HEAD</span> File <em>06</em></h2>
+<h4>Execute:</h4>
+<pre class="instructions">cat .git/HEAD</pre>
+<h4>Output:</h4>
+<pre class="sample">$ cat .git/HEAD
+ref: refs/heads/master
+</pre>
+<p>The <span class="caps">HEAD</span> file contains a reference to the current branch.  It should be a reference to master at this point.</p>
+  </div>
+
+  <div id="index">
+  <h1>Labs Index</h1>
+  <div id="show_bookmarks"></div>
+  <div id="no_bookmarks"></div>
+  <ul>
+    <li data-lab-id="0"><a href="index.html"><span>&nbsp;</span>Cover Page</a></li>
+          <li data-lab-id="1"><a href="lab_01.html"><span>1:</span> Setup</a></li>
+          <li data-lab-id="2"><a href="lab_02.html"><span>2:</span> More Setup</a></li>
+          <li data-lab-id="3"><a href="lab_03.html"><span>3:</span> Create a Project</a></li>
+          <li data-lab-id="4"><a href="lab_04.html"><span>4:</span> Checking Status</a></li>
+          <li data-lab-id="5"><a href="lab_05.html"><span>5:</span> Making Changes</a></li>
+          <li data-lab-id="6"><a href="lab_06.html"><span>6:</span> Staging Changes</a></li>
+          <li data-lab-id="7"><a href="lab_07.html"><span>7:</span> Staging and Committing</a></li>
+          <li data-lab-id="8"><a href="lab_08.html"><span>8:</span> Commiting Changes</a></li>
+          <li data-lab-id="9"><a href="lab_09.html"><span>9:</span> Changes, not Files</a></li>
+          <li data-lab-id="10"><a href="lab_10.html"><span>10:</span> History</a></li>
+          <li data-lab-id="11"><a href="lab_11.html"><span>11:</span> Aliases</a></li>
+          <li data-lab-id="12"><a href="lab_12.html"><span>12:</span> Getting Old Versions</a></li>
+          <li data-lab-id="13"><a href="lab_13.html"><span>13:</span> Tagging versions</a></li>
+          <li data-lab-id="14"><a href="lab_14.html"><span>14:</span> Undoing Local Changes (before staging)</a></li>
+          <li data-lab-id="15"><a href="lab_15.html"><span>15:</span> Undoing Staged Changes (before committing)</a></li>
+          <li data-lab-id="16"><a href="lab_16.html"><span>16:</span> Undoing Committed Changes</a></li>
+          <li data-lab-id="17"><a href="lab_17.html"><span>17:</span> Removing Commits from a Branch</a></li>
+          <li data-lab-id="18"><a href="lab_18.html"><span>18:</span> Remove the oops tag</a></li>
+          <li data-lab-id="19"><a href="lab_19.html"><span>19:</span> Amending Commits</a></li>
+          <li data-lab-id="20"><a href="lab_20.html"><span>20:</span> Moving Files</a></li>
+          <li data-lab-id="21"><a href="lab_21.html"><span>21:</span> More Structure</a></li>
+          <li data-lab-id="22"><a href="lab_22.html"><span>22:</span> Git Internals: The .git directory</a></li>
+          <li data-lab-id="23"><a href="lab_23.html"><span>23:</span> Git Internals: Working directly with Git Objects</a></li>
+          <li data-lab-id="24"><a href="lab_24.html"><span>24:</span> Creating a Branch</a></li>
+          <li data-lab-id="25"><a href="lab_25.html"><span>25:</span> Navigating Branches</a></li>
+          <li data-lab-id="26"><a href="lab_26.html"><span>26:</span> Changes in Master</a></li>
+          <li data-lab-id="27"><a href="lab_27.html"><span>27:</span> Viewing Diverging Branches</a></li>
+          <li data-lab-id="28"><a href="lab_28.html"><span>28:</span> Merging</a></li>
+          <li data-lab-id="29"><a href="lab_29.html"><span>29:</span> Creating a Conflict</a></li>
+          <li data-lab-id="30"><a href="lab_30.html"><span>30:</span> Resolving Conflicts</a></li>
+          <li data-lab-id="31"><a href="lab_31.html"><span>31:</span> Rebasing VS Merging</a></li>
+          <li data-lab-id="32"><a href="lab_32.html"><span>32:</span> Resetting the Greet Branch</a></li>
+          <li data-lab-id="33"><a href="lab_33.html"><span>33:</span> Resetting the Master Branch</a></li>
+          <li data-lab-id="34"><a href="lab_34.html"><span>34:</span> Rebasing</a></li>
+          <li data-lab-id="35"><a href="lab_35.html"><span>35:</span> Merging Back to Master</a></li>
+          <li data-lab-id="36"><a href="lab_36.html"><span>36:</span> Mutliple Repositories</a></li>
+          <li data-lab-id="37"><a href="lab_37.html"><span>37:</span> Cloning Repositories</a></li>
+          <li data-lab-id="38"><a href="lab_38.html"><span>38:</span> Review the Cloned Repository</a></li>
+          <li data-lab-id="39"><a href="lab_39.html"><span>39:</span> What is Origin?</a></li>
+          <li data-lab-id="40"><a href="lab_40.html"><span>40:</span> Remote Branches</a></li>
+          <li data-lab-id="41"><a href="lab_41.html"><span>41:</span> Change the Original Repository</a></li>
+          <li data-lab-id="42"><a href="lab_42.html"><span>42:</span> Fetching Changes</a></li>
+          <li data-lab-id="43"><a href="lab_43.html"><span>43:</span> Merging Pulled Changes</a></li>
+          <li data-lab-id="44"><a href="lab_44.html"><span>44:</span> Pulling Changes</a></li>
+          <li data-lab-id="45"><a href="lab_45.html"><span>45:</span> Adding a Tracking Branch</a></li>
+          <li data-lab-id="46"><a href="lab_46.html"><span>46:</span> Bare Repositories</a></li>
+          <li data-lab-id="47"><a href="lab_47.html"><span>47:</span> Adding a Remote Repository</a></li>
+          <li data-lab-id="48"><a href="lab_48.html"><span>48:</span> Pushing a Change</a></li>
+          <li data-lab-id="49"><a href="lab_49.html"><span>49:</span> Pulling Shared Changes</a></li>
+          <li data-lab-id="50"><a href="lab_50.html"><span>50:</span> Hosting your Git Repositories</a></li>
+          <li data-lab-id="51"><a href="lab_51.html"><span>51:</span> Sharing Repos</a></li>
+          <li data-lab-id="52"><a href="lab_52.html"><span>52:</span> Advanced / Future Topics</a></li>
+          <li data-lab-id="53"><a href="lab_53.html"><span>53:</span> Thank You</a></li>
+      </ul>
+</div>
+
+
+  <footer>
+    <nav>
+      <ul>
+  <li class="arrow next">
+          <a href="lab_23.html">Next</a>
+      </li>
+  <li class="arrow previous">
+          <a href="lab_21.html">Previous</a>
+      </li>
+  <li class="index_button"><a href="#">Index</a></li>
+</ul>
+
+    </nav>
+    <a href="http://edgecase.com" target="_blank" id="edgecase_link_small">EdgeCase</a>
+  </footer>
+</body>
+</html>
